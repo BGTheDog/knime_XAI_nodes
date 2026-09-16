@@ -1,0 +1,4 @@
+org.whozinzahs.grok:
+  src: /Users/robertburkhart/Documents/Development/Whozinzahs/knime_dev
+  conda_env_path: /Users/robertburkhart/Documents/Development/Whozinzahs/knime_dev/.pixi/envs/default
+  debug_mode: true

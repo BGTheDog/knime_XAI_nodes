@@ -1,0 +1,13 @@
+name: grok
+group_id: org.whozinzahs
+description: Grok (xAI) nodes for KNIME
+long_description: >
+  Authenticate with the xAI API, select Grok chat models, prompt them from
+  table columns, and run agents that can inspect input tables and emit extra
+  data tables on dynamic output ports.
+version: 0.1.2
+author: Whozinzahs
+vendor: Whozinzahs
+license_file: LICENSE.TXT
+pixi_toml_path: pixi.toml
+extension_module: ./src/extension

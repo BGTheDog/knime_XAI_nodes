@@ -1,0 +1,32 @@
+[workspace]
+channels = ["knime", "conda-forge"]
+platforms = ["win-64", "linux-64", "osx-64", "osx-arm64"]
+
+[tasks]
+test = { cmd = "pytest" }
+format = { cmd = "ruff format ." }
+
+[dependencies]
+python = "3.11.*"
+pytest = "*"
+ruff = "*"
+knime-extension = "*"
+knime-python-base = "*"
+knime-python-versions = "5.*"
+openai = ">=1.40"
+pandas = "*"
+
+[feature.build.dependencies]
+python = "3.9.*"
+knime-extension-bundling = "5.*"
+
+[feature.debug.dependencies]
+debugpy = "*"
+
+[feature.build.tasks]
+build = { args = [{ "arg" = "dest", "default" = "./local-update-site" }], cmd = "build-python-extension . {{ dest }} --update-sites-version nightly"}
+register-debug-in-knime = { description = "Register this extension with a KNIME Analytics Platform installation.", args = [{ "arg" = "search_path", "default" = "" }], cmd = "register-debug-in-knime{% if search_path %} --search-path \"{{ search_path }}\"{% endif %}" }
+
+[environments]
+build = {features = ["build"], no-default-feature = true}
+debug = {features = ["debug"]}
