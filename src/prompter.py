@@ -9,6 +9,7 @@ import pandas as pd
 
 from ports import (
     GROK_ICON,
+    NODE_ATTRIBUTION,
     GrokChatModelPortObject,
     GrokChatModelPortObjectSpec,
     grok_category,
@@ -59,10 +60,12 @@ def _first_string_column(schema: knext.Schema) -> str:
     "The input table with a new column of Grok responses.",
 )
 class GrokLLMPrompter:
-    """Prompt a Grok model once per input row.
+    f"""Prompt a Grok model once per input row.
 
     Each row is treated as its own conversation. The model does not remember
     previous rows. Connect a **Grok Chat Model** and a table of prompts.
+
+    {NODE_ATTRIBUTION}
     """
 
     system_message = knext.MultilineStringParameter(

@@ -12,6 +12,7 @@ import pandas as pd
 from client import ChatResponse, GrokClient
 from ports import (
     GROK_ICON,
+    NODE_ATTRIBUTION,
     GrokChatModelPortObject,
     GrokChatModelPortObjectSpec,
     grok_category,
@@ -139,7 +140,7 @@ def _conversation_schema() -> knext.Schema:
     "Tables the agent emitted. Add ports with the node's Add output port control, then ask for that data in the prompt.",
 )
 class GrokAgent:
-    """Run a Grok agent with a prompt table and optional extra data tables.
+    f"""Run a Grok agent with a prompt table and optional extra data tables.
 
     Add **Data outputs** on the node (⋯ → Add output port) when you want the
     agent to return tables. Tell Grok in the prompt how many tables to emit.
@@ -148,6 +149,8 @@ class GrokAgent:
 
     This node does not connect to KNIME's LLM Prompter or Agent Prompter.
     Use it with **Grok Authenticator** and **Grok Chat Model Selector**.
+
+    {NODE_ATTRIBUTION}
     """
 
     system_message = knext.MultilineStringParameter(

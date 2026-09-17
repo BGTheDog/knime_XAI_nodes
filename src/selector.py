@@ -7,6 +7,7 @@ import knime.extension as knext
 from client import DEFAULT_MODELS
 from ports import (
     GROK_ICON,
+    NODE_ATTRIBUTION,
     GrokAuthenticationPortObject,
     GrokAuthenticationPortObjectSpec,
     GrokChatModelPortObject,
@@ -42,10 +43,12 @@ def _list_models(ctx: knext.ConfigurationContext):
     grok_chat_port_type,
 )
 class GrokChatModelSelector:
-    """Select a Grok chat model.
+    f"""Select a Grok chat model.
 
     After authenticating with **Grok Authenticator**, pick a model and sampling
     settings. The output port connects to **Grok LLM Prompter** or **Grok Agent**.
+
+    {NODE_ATTRIBUTION}
     """
 
     model = knext.StringParameter(

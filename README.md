@@ -1,6 +1,6 @@
 # Grok nodes for KNIME
 
-Python KNIME extension that talks to the [xAI API](https://docs.x.ai) (`https://api.x.ai/v1`). Nodes use **Grok-only port types**, so they connect to each other and not to KNIME’s OpenAI / Claude / LLM Prompter ports.
+Python KNIME extension from **Whozinzahs Holdings, LLC** ([Whozinzahs.com](https://Whozinzahs.com)) that talks to the [xAI API](https://docs.x.ai) (`https://api.x.ai/v1`). Nodes use **Grok-only port types**, so they connect to each other and not to KNIME’s OpenAI / Claude / LLM Prompter ports.
 
 ## Nodes
 
@@ -87,3 +87,7 @@ pixi run register-debug-in-knime
 Then fully quit and reopen KNIME 5.9. Demo workflow: Grok Authenticator → Grok Chat Model Selector → Table Creator (prompt column) → Grok LLM Prompter.
 
 KNIME 5.4 / 5.7 will not pick this up unless you also register those installs; develop and demo against **5.9**.
+
+## License
+
+Copyright 2026 Whozinzahs Holdings, LLC. Licensed under the Apache License, Version 2.0. See `LICENSE.TXT`.

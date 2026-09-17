@@ -7,6 +7,7 @@ import knime.extension as knext
 from client import DEFAULT_BASE_URL
 from ports import (
     GROK_ICON,
+    NODE_ATTRIBUTION,
     CredentialsSettings,
     GrokAuthenticationPortObject,
     GrokAuthenticationPortObjectSpec,
@@ -28,11 +29,13 @@ from ports import (
     grok_auth_port_type,
 )
 class GrokAuthenticator:
-    """Authenticates with the xAI API using an API key.
+    f"""Authenticates with the xAI API using an API key.
 
     Paste an xAI API key from [console.x.ai](https://console.x.ai), or (under
     Advanced settings) select workflow credentials whose *password* field holds
     the key. Connect this node to **Grok Chat Model Selector**.
+
+    {NODE_ATTRIBUTION}
     """
 
     api_key = knext.StringParameter(

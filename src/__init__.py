@@ -1,1 +1,1 @@
-"""Grok (xAI) KNIME nodes."""
+"""Grok (xAI) KNIME nodes. Provided by Whozinzahs Holdings, LLC (Whozinzahs.com)."""

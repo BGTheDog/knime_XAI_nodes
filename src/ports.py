@@ -7,12 +7,17 @@ import knime.extension as knext
 from client import DEFAULT_BASE_URL, DEFAULT_MODELS, GrokClient
 
 GROK_ICON = "icons/grok.png"
+VENDOR_NAME = "Whozinzahs Holdings, LLC"
+VENDOR_SITE = "https://Whozinzahs.com"
+NODE_ATTRIBUTION = (
+    f"Provided by {VENDOR_NAME}. [{VENDOR_SITE.removeprefix('https://')}]({VENDOR_SITE})"
+)
 
 grok_category = knext.category(
     path="/",
     level_id="grok",
     name="Grok",
-    description="Nodes for xAI Grok models.",
+    description="xAI Grok models. Provided by Whozinzahs Holdings, LLC (Whozinzahs.com).",
     icon=GROK_ICON,
 )
 
