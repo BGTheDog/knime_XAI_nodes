@@ -8,6 +8,7 @@ from pandas.testing import assert_frame_equal
 from agent import GrokAgent
 from auth import GrokAuthenticator
 from client import ChatResponse, ToolCall
+from image_generator import GrokImageGenerator
 from ports import (
     GrokAuthenticationPortObject,
     GrokAuthenticationPortObjectSpec,
@@ -162,3 +163,50 @@ class TestAgent:
             pd.DataFrame({"fruit": ["apple"], "n": [2]}),
             check_dtype=False,
         )
+
+
+class TestImageGenerator:
+    def test_configure_with_prompt(self):
+        node = GrokImageGenerator()
+        node.model = "grok-imagine-image-2.0"
+        node.prompt = "A lighthouse at dawn"
+        spec, table_spec = node.configure(FakeContext(), _auth_spec(), None)
+        assert spec.format in (knext.ImageFormat.PNG, knext.ImageFormat.PNG.value, "png")
+
+    def test_configure_requires_prompt(self):
+        node = GrokImageGenerator()
+        node.model = "grok-imagine-image-2.0"
+        node.prompt = ""
+        try:
+            node.configure(FakeContext(), _auth_spec(), None)
+            raise AssertionError("expected InvalidParametersError")
+        except knext.InvalidParametersError:
+            pass
+
+    def test_execute_returns_png(self):
+        node = GrokImageGenerator()
+        node.model = "grok-imagine-image-2.0"
+        node.prompt = "A cat"
+        png = (
+            b"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01"
+            b"\x08\x06\x00\x00\x00\x1f\x15\xc4\x89\x00\x00\x00\nIDATx\x9cc\x00\x01"
+            b"\x00\x00\x05\x00\x01\r\n-\xb4\x00\x00\x00\x00IEND\xaeB`\x82"
+        )
+
+        class FakeGrok:
+            def __init__(self, *args, **kwargs):
+                pass
+
+            def generate_image(self, **kwargs):
+                assert kwargs["model"] == "grok-imagine-image-2.0"
+                assert kwargs["prompt"] == "A cat"
+                return png
+
+        with patch("image_generator.GrokClient", FakeGrok):
+            result, table = node.execute(
+                FakeContext(),
+                GrokAuthenticationPortObject(_auth_spec()),
+                None,
+            )
+        assert result == png
+        assert "Image" in table.to_pandas().columns

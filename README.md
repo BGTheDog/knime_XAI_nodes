@@ -10,14 +10,18 @@ Python KNIME extension from **Whozinzahs Holdings, LLC** ([Whozinzahs.com](https
 | **Grok Chat Model Selector** | Picks a Grok model (default `grok-4.6`) and sampling settings. |
 | **Grok LLM Prompter** | Sends each row of a prompt column to Grok and appends a response column. |
 | **Grok Agent** | One-shot agent: prompt table in, conversation table out, optional dynamic data tables. |
+| **Grok Image Generator** | Generates a PNG with Grok Imagine (`grok-imagine-image-2.0` by default). Image port plus a one-row table; optional write-to-file. |
 
 Typical flow:
 
 ```
 Credentials Configuration  →  Grok Authenticator  →  Grok Chat Model Selector
-                                                         ├→ Grok LLM Prompter
-                                                         └→ Grok Agent
+                         │                              ├→ Grok LLM Prompter
+                         │                              └→ Grok Agent
+                         └→ Grok Image Generator
 ```
+
+Imagine models are chosen on **Grok Image Generator**, not on the chat model selector (those models cannot be used with the Prompter or Agent).
 
 ## Agent data ports
 

@@ -15,6 +15,7 @@ knime-python-base = "*"
 knime-python-versions = "5.*"
 openai = ">=1.40"
 pandas = "*"
+pillow = "*"
 
 [feature.build.dependencies]
 python = "3.9.*"

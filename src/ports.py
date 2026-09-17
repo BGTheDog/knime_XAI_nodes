@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import knime.extension as knext
 
-from client import DEFAULT_BASE_URL, DEFAULT_MODELS, GrokClient
+from client import DEFAULT_BASE_URL, DEFAULT_IMAGE_MODELS, DEFAULT_MODELS, GrokClient
 
 GROK_ICON = "icons/grok.png"
 VENDOR_NAME = "Whozinzahs Holdings, LLC"
@@ -112,6 +112,12 @@ class GrokAuthenticationPortObjectSpec(knext.PortObjectSpec):
             return GrokClient(self.api_key(ctx), self.base_url).list_models()
         except Exception:
             return list(DEFAULT_MODELS)
+
+    def get_image_model_list(self, ctx: knext.ConfigurationContext) -> list[str]:
+        try:
+            return GrokClient(self.api_key(ctx), self.base_url).list_image_models()
+        except Exception:
+            return list(DEFAULT_IMAGE_MODELS)
 
     def validate_api_key(self, ctx: knext.ExecutionContext) -> None:
         try:
