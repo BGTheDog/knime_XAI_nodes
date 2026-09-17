@@ -172,6 +172,7 @@ class TestImageGenerator:
         node.prompt = "A lighthouse at dawn"
         spec, table_spec = node.configure(FakeContext(), _auth_spec(), None)
         assert spec.format in (knext.ImageFormat.PNG, knext.ImageFormat.PNG.value, "png")
+        assert list(table_spec.column_names) == ["Prompt", "Image"]
 
     def test_configure_requires_prompt(self):
         node = GrokImageGenerator()

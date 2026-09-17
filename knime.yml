@@ -6,7 +6,7 @@ long_description: >
   table columns, generate images with Grok Imagine, and run agents that can
   inspect input tables and emit extra data tables on dynamic output ports.
   Provided by Whozinzahs Holdings, LLC (Whozinzahs.com).
-version: 0.1.5
+version: 0.1.7
 author: Whozinzahs Holdings, LLC
 vendor: Whozinzahs Holdings, LLC
 license_file: LICENSE.TXT

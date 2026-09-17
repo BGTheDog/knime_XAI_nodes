@@ -142,7 +142,7 @@ class GrokImageGenerator:
             raise knext.InvalidParametersError(
                 "Enter an image prompt, or connect a table with a prompt column."
             )
-        return knext.ImagePortObjectSpec(knext.ImageFormat.PNG), None
+        return knext.ImagePortObjectSpec(knext.ImageFormat.PNG), _image_table_schema()
 
     def execute(
         self,
@@ -182,6 +182,22 @@ class GrokImageGenerator:
                 if text:
                     return text
         return (self.prompt or "").strip()
+
+
+def _image_column_type():
+    try:
+        return knext.logical(Image.Image)
+    except TypeError:
+        return knext.blob()
+
+
+def _image_table_schema() -> knext.Schema:
+    return knext.Schema.from_columns(
+        [
+            knext.Column(knext.string(), "Prompt"),
+            knext.Column(_image_column_type(), "Image"),
+        ]
+    )
 
 
 def _image_table(prompt: str, png: bytes) -> knext.Table:
